@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reading Record</title>
+</head>
+<body>
+<h1>Word List</h1>
+
+<div>
+	<a href="/words/add"><button class="button">Add</button></a>
+</div>
+
+<div>
+	<table>
+	    <thead>
+	        <tr>
+	            <th>Word</th>
+	            <th>&nbsp;</th>
+	            <th>&nbsp;</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	{% for row in cursors %}
+	        <tr>
+	            <td><a href="/articles/list/word/{{row[1]}}">{{row[1]}}</a></td>
+	            <td><a href="/words/modify/{{row[0]}}"><button class="button">Edit</button></a></td>
+	            <td><a href="/words/delete/{{row[0]}}"><button class="button">Delete</button></a></td>
+	        </tr>
+	        {% endfor %}
+	    </tbody>
+	</table>
+</div>
+
+<div>
+	<a href="/top"><button class="button">Top</button></a>
+</div>
+
+</body>
+</html>

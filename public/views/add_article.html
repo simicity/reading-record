@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reading Record</title>
+</head>
+<body>
+<h1>Add An Article</h1>
+
+<div>
+	<form method="post" action="/articles/add/execute">
+	<table>
+	    <tbody>
+	    	<tr>
+	            <td>URL</td>
+	            <td><input type="text" name="url" value="{{url}}"></td>
+	        </tr>
+	        <tr>
+	            <td>Tag</td>
+	            <td><input type="text" name="tag" value="{{tag}}"></td>
+	        </tr>
+	    </tbody>
+	</table>
+	<div>
+		<button type="submit" class="button">Add</button>
+	</div>
+	</form>
+</div>
+
+<div>
+	<a href="/articles/list"><button class="button">Back</button></a>
+</div>
+
+</body>
+</html>

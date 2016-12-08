@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Reading Record</title>
+</head>
+<body>
+<h1>Add An Word</h1>
+
+<div>
+	<form method="post" action="/words/add/execute">
+	<table>
+	    <tbody>
+	    	<tr>
+	            <td>Word</td>
+	            <td><input type="text" name="word" value="{{word}}"></td>
+	        </tr>
+	    </tbody>
+	</table>
+	<div>
+		<button type="submit" class="button">Add</button>
+	</div>
+	</form>
+</div>
+
+<div>
+	<a href="/words/list"><button class="button">Back</button></a>
+</div>
+
+</body>
+</html>
