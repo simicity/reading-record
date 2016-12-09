@@ -9,14 +9,14 @@ cur.execute( "USE reading_record" )
 #--------------------
 # function: add word 
 #--------------------
-def addWord( word = None, article_id = None ):
+def addWord( word = None ):
 	if word == None:
 		return
 
 	word = word.replace('_', ' ')
 	cur.execute( "SELECT * FROM word WHERE word = %s", ( word ) )
 	if cur.rowcount == 0:
-		cur.execute( "INSERT INTO word ( word, article_id ) VALUES ( %s, %s )", ( word, article_id ) )
+		cur.execute( "INSERT INTO word ( word ) VALUES ( %s )", ( word ) )
 		conn.commit()
 	else:
 		print( "the word already exists" )
@@ -32,71 +32,28 @@ def showWord():
 		print( "no word exists" )
 	else:
 		print( '\n' )
-		print( ' id | word | article_id' )
-		print( '------------------------' )
+		print( ' id | word ' )
+		print( '-----------' )
 		for row in cur:
-			print( '{}: {} [{}]'.format(row[0], row[1], row[2]) )
+			print( '{}: {}'.format(row[0], row[1]) )
 		print( '\n' )
 	return
 # def showWord End #
 
-#-------------------------------------------
-# function: show word in a specific article 
-#-------------------------------------------
-def showWordByArticle( article_ids = None ):
-	if len( article_ids ) < 2:
-		return
-	else:
-		article_ids.pop( 0 )
-
-	print( '\n' )
-	print( ' id | url | article_id' )
-	print( '-----------------------' )
-
-	found = False
-	cur.execute("SELECT * FROM word WHERE article_id IS NOT NULL" )
-	if cur.rowcount != 0:
-		for row in cur:
-			for article_id in article_ids:
-				if article_id == row[2]:
-					print( '{}: {} [{}]'.format(row[0], row[1], row[2]) )
-					if found == False:
-						found = True
-					break
-
-	if found == False:
-		print("no word is found")
-
-	print( '\n' )
-	
-	return
-# def showWordByArticle End #
-
 #-------------------------------------
 # function: modify word or article id  
 #-------------------------------------
-def modifyWord( id = None, col = None ):
+def modifyWord( id = None, word = None ):
 	if id == None:
 		return
 
-	if col == 'word':
-		cur.execute( "SELECT * FROM word WHERE word = %s", (word) )
-		if cur.rowcount == 0:
-			print( "the word doesn't exist" )
-		else:
-			word = input( "new word: " )
-			cur.execute( "UPDATE word SET word = %s WHERE word = %s", (word) )
-			conn.commit()
-	elif col == 'id':
-		cur.execute( "SELECT * FROM word WHERE article_id = %s", (int(id)) )
-		if cur.rowcount == 0:
-			print( "the word doesn't exist" )
-		else:
-			article_id = input( "new article id: " )
-			cur.execute( "UPDATE word SET article_id = %s WHERE article_id = %s", (int(article_id)) )
-			conn.commit()
+	cur.execute( "SELECT * FROM word WHERE word = %s", (word) )
+	if cur.rowcount == 0:
+		print( "the word doesn't exist" )
 	else:
-		print( "spicify word or article id to modify" )
+		word = word.replace('_', ' ')
+		cur.execute( "UPDATE word SET word = %s WHERE word = %s", (word) )
+		conn.commit()
 
 	return
 # def modifyWord End #

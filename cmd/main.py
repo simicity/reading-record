@@ -17,8 +17,8 @@ if __name__ == "__main__":
 	subparser_article.add_argument( "-open", "-o", nargs='+', help="open article in safari", action="store" )
 
 	subparser_word = subparsers.add_parser('word')
-	subparser_word.add_argument( "-add", "-a", nargs='+', help="add article", action="store" )
-	subparser_word.add_argument( "-show", "-s", nargs='+', help="show list of article", action="store" )
+	subparser_word.add_argument( "-add", "-a", nargs=1, help="add article", action="store" )
+	subparser_word.add_argument( "-show", "-s", help="show list of article", action="store_true" )
 	subparser_word.add_argument( "-modify", "-m", nargs=2, help="modify article", action="store" )
 	subparser_word.add_argument( "-delete", "-d", nargs='+', help="delete article", action="store" )
 
@@ -47,17 +47,9 @@ if __name__ == "__main__":
 			openArticle( args.open )
 	elif args.tool == "word":
 		if args.add:
-			if len( args.add ) == 2:
-				addWord( args.add[0], args.add[1] )
-			else:
-				addWord( args.add[0] )
+			addWord( args.add[0] )
 		elif args.show:
-			if args.show[0].lower() == "all":
-				showWord()	
-			elif args.show[0].lower() == "id":
-				showWordByArticle( args.show )
-			else:
-				print( 'invalid command' )
+			showWord()
 		elif args.modify:
 			modifyWord( args.modify[0], args.modify[1] )	
 		elif args.delete:
