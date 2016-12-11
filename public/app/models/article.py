@@ -76,11 +76,12 @@ class Article:
 
 		self.cur.execute("SELECT * FROM article")
 		if self.cur.rowcount != 0:
+			has_word = set()
 			for row in self.cur:
 				articleBsObj = self.getConnection( row[1] )
-				if word not in articleBsObj.text:
-					self.cur.remove(row)
-			return self.cur	
+				if articleBsObj is not None and word in articleBsObj.text:
+					has_word.add(row[0])
+			return has_word
 
 		return
 	# def fetchArticleByWord End #	
@@ -127,7 +128,8 @@ class Article:
 			print(e)
 			return None
 		except URLError as e:
-			print("Not found")
+			print(e)
 			return None
-		return
+		else:
+			return None
 	# def getConnection End #

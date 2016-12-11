@@ -16,11 +16,11 @@ def createWord():
 
 @post('/words/add/execute')
 def executeAddArticle():
-	word = request.forms.get('word')
-	if url:
-		article.addArticle(word)
+	input_word = request.forms.get('word')
+	if input_word:
+		word.addWord(input_word)
 		redirect("/words/list")
-	return template('input_err')
+	return template('add_word_err')
 
 @route('/words/list')
 def showWordList():
@@ -38,8 +38,10 @@ def modifyWord(id):
 @post('/words/modify/<id:int>/execute')
 def executeModifyWord(id):
 	word = request.forms.get('word')
-	article.modifyWord(id, word)
-	redirect("/words/list")
+	if word:
+		word.modifyWord(word)
+		redirect("/words/list")
+	return template('modify_word_err')
 
 @route('/words/delete/<id:int>')
 def deleteWord(id):

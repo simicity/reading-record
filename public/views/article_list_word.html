@@ -18,19 +18,43 @@
     <![endif]-->
 </head>
 <body>
-<h1>Add an Word</h1>
+    <h1>Article List</h1>
 
 <div>
-	<form method="post" action="/words/add/execute">
-	<div class="form-group">
-		<label for="word">Word</label>
-		<input type="text" class="form-control" id="word" name="word" value="{{word}}">
-	</div>
-	<button type="submit" class="btn btn-danger">Add</button>
+	<a href="/articles/add"><button type="button" class="btn btn-danger">Add</button></a>
+</div>
+
+<div class="container">
+	<table class="table">
+	    <thead>
+	        <tr>
+	            <th>URL</th>
+	            <th>Tag</th>
+	            <th>Modified Date</th>
+	            <th>&nbsp;</th>
+	            <th>&nbsp;</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	    	{% for row in cursors %}
+	    	{% if row[0] in has_word %}
+	        <tr>
+	            <td><a href="{{row[1]}}" target="_blank">{{row[1]}}</a></td>
+	            <td><a href="/articles/list/tag/{{row[2]}}">{{row[2]}}</td>
+	            <td>{{row[3]}}</td>
+	            <td><a href="/articles/modify/{{row[0]}}"><button type="button" class="btn btn-default btn-xs">Modify</button></a></td>
+	            <td><a href="/articles/delete/{{row[0]}}"><button type="button" class="btn btn-default btn-xs">Delete</button></a></td>
+	        </tr>
+	        {% endif %}
+	        {% endfor %}
+	    </tbody>
+	</table>
 </div>
 
 <div>
-	<a href="/words/list">Back</a>
+	<a href="/articles/list">Show All</a>
+	<br>
+	<a href="/top">Top</a>
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

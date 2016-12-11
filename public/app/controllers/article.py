@@ -21,7 +21,7 @@ def executeAddArticle():
 	if url:
 		article.addArticle(url, tag)
 		redirect("/articles/list")
-	return template('input_err')
+	return template('add_article_err')
 
 @route('/articles/list')
 def showArticleList():
@@ -37,9 +37,10 @@ def findArticleByTag(tag):
 
 @route('/articles/list/word/<word>')
 def findArticleByWord(word):
-	cursors = article.fetchArticleByWord(word)
+	has_word = article.fetchArticleByWord(word)
+	cursors = article.fetchAllArticle()
 	if cursors != None:
-		return template('article_list', cursors=cursors)
+		return template('article_list_word', cursors=cursors, has_word=has_word)
 	return showArticleList()
 
 @route('/articles/modify/<id:int>')
@@ -54,8 +55,10 @@ def modifyArticle(id):
 def executeModifyArticle(id):
 	url = request.forms.get('url')
 	tag = request.forms.get('tag')
-	article.modifyArticle(id, url, tag)
-	redirect("/articles/list")
+	if url:
+		article.modifyArticle(url, tag)
+		redirect("/articles/list")
+	return template('modify_article_err')
 
 @route('/articles/delete/<id:int>')
 def deleteArticle(id):
