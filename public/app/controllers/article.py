@@ -56,7 +56,7 @@ def executeModifyArticle(id):
 	url = request.forms.get('url')
 	tag = request.forms.get('tag')
 	if url:
-		article.modifyArticle(url, tag)
+		article.modifyArticle(id, url, tag)
 		redirect("/articles/list")
 	return template('modify_article_err')
 

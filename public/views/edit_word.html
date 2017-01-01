@@ -18,20 +18,25 @@
     <![endif]-->
 </head>
 <body>
+
+<div class="container">
+    
 <h1>Edit</h1>
 
 <div>
-	<form method="post" action="/words/modify/{{id}}/execute">
-	<div class="form-group">
-		<label for="word">Word</label>
-		<input type="text" class="form-control" id="word" name="word" value="{{word}}">
-	</div>
-	<button type="submit" class="btn btn-danger">Update</button>
-	</form>
+    <form method="post" action="/words/modify/{{id}}/execute">
+    <div class="form-group">
+        <label for="word">Word</label>
+        <input type="text" class="form-control" id="word" name="word" value="{{word}}">
+    </div>
+    <button type="submit" class="btn btn-danger">Update</button>
+    </form>
 </div>
 
 <div>
-	<a href="/articles/list">Back</a>
+    <a href="/words/list">Back</a>
+</div>
+
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -37,13 +37,13 @@ def modifyWord(id):
 
 @post('/words/modify/<id:int>/execute')
 def executeModifyWord(id):
-	word = request.forms.get('word')
-	if word:
-		word.modifyWord(word)
+	input_word = request.forms.get('word')
+	if input_word:
+		word.modifyWord(id, input_word)
 		redirect("/words/list")
 	return template('modify_word_err')
 
 @route('/words/delete/<id:int>')
 def deleteWord(id):
 	cursors = word.deleteWord(id)
-	return template('word_list', cursors=cursors)
+	return redirect("/words/list")

@@ -52,11 +52,11 @@ class Word:
 	#-------------------------------------
 	def modifyWord( self, id = None, word = None ):
 		if id == None:
-			return	
+			return
 
-		self.cur.execute( "SELECT * FROM word WHERE word = %s", ( word ) )
+		self.cur.execute( "SELECT * FROM word WHERE id = %s", ( int(id) ) )
 		if self.cur.rowcount != 0:
-			self.cur.execute( "UPDATE word SET word = %s WHERE word = %s", ( word ) )
+			self.cur.execute( "UPDATE word SET word = %s WHERE id = %s", ( word, int(id) ) )
 			self.conn.commit()	
 
 		return

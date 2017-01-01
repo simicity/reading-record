@@ -5,7 +5,6 @@ from urllib.request import urlopen
 from urllib.error import HTTPError
 from urllib.error import URLError
 from urllib.parse import urlparse
-from bs4 import BeautifulSoup
 
 class Article:
 	def __init__( self ):
@@ -78,12 +77,19 @@ class Article:
 		if self.cur.rowcount != 0:
 			has_word = set()
 			for row in self.cur:
-				articleBsObj = self.getConnection( row[1] )
-				if articleBsObj is not None and word in articleBsObj.text:
-					has_word.add(row[0])
-			return has_word
+				try:
+					pagetext = urlopen(row[1]).read().decode()
+					if word in pagetext:
+						print(word)
+						has_word.add(row[0])
+				except HTTPError as e:
+					continue
+				except URLError as e:
+					continue
+				else:
+					continue
 
-		return
+		return has_word
 	# def fetchArticleByWord End #	
 
 	#-------------------------------
@@ -115,21 +121,3 @@ class Article:
 
 		return
 	# def deleteArticle End #	
-
-	#---------------------------
-	# function: connect to page 
-	#---------------------------
-	def getConnection( self, url ):
-		try:
-			html = urlopen( url )
-			bsObj = BeautifulSoup( html, "html.parser" )
-			return bsObj
-		except HTTPError as e:
-			print(e)
-			return None
-		except URLError as e:
-			print(e)
-			return None
-		else:
-			return None
-	# def getConnection End #

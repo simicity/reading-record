@@ -21,6 +21,7 @@ TEMPLATE_PATH.append(BASE_DIR + "/views")
 @route('/articles/add/css/<filename>')
 @route('/articles/modify/css/<filename>')
 @route('/words/css/<filename>')
+@route('/words/modify/css/<filename>')
 def css_dir(filename):
     return static_file(filename, root=BASE_DIR+"/static/css")
 
@@ -31,6 +32,7 @@ def css_dir(filename):
 @route('/articles/add/js/<filename>')
 @route('/articles/modify/js/<filename>')
 @route('/words/js/<filename>')
+@route('/words/modify/js/<filename>')
 def js_dir(filename):
     return static_file(filename, root=BASE_DIR+"/static/js")
 
@@ -41,6 +43,7 @@ def js_dir(filename):
 @route('/articles/add/font/<filename>')
 @route('/articles/modify/font/<filename>')
 @route('/words/font/<filename>')
+@route('/words/modify/font/<filename>')
 def font_dir(filename):
     return static_file(filename, root=BASE_DIR+"/static/fonts")
 

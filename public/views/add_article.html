@@ -18,24 +18,29 @@
     <![endif]-->
 </head>
 <body>
+
+<div class="container">
+    
 <h1>Add an Article</h1>
 
 <div>
-	<form method="post" action="/articles/add/execute">
-	<div class="form-group">
-		<label for="url">URL</label>
-		<input type="text" class="form-control" id="url" name="url" value="{{url}}">
-	</div>
-	<div class="form-group">
-		<label for="tag">Tag</label>
-		<input type="text" class="form-control" id="tag" name="tag" value="{{tag}}">
-	</div>
-	<button type="submit" class="btn btn-danger">Add</button>
-	</form>
+    <form method="post" action="/articles/add/execute">
+    <div class="form-group">
+        <label for="url">URL</label>
+        <input type="text" class="form-control" id="url" name="url" value="{{url}}">
+    </div>
+    <div class="form-group">
+        <label for="tag">Tag</label>
+        <input type="text" class="form-control" id="tag" name="tag" value="{{tag}}">
+    </div>
+    <button type="submit" class="btn btn-danger">Add</button>
+    </form>
 </div>
 
 <div>
-	<a href="/articles/list">Back</a>
+    <a href="/articles/list">Back</a>
+</div>
+
 </div>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
