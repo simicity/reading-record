@@ -80,7 +80,6 @@ class Article:
 				try:
 					pagetext = urlopen(row[1]).read().decode()
 					if word in pagetext:
-						print(word)
 						has_word.add(row[0])
 				except HTTPError as e:
 					continue
